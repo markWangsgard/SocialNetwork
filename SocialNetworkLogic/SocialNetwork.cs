@@ -37,7 +37,7 @@ public class SocialNetwork
         }
 
         var listOfFriends = socialNetworkDictionary[name];
-        foreach(var friend in listOfFriends)
+        foreach (var friend in listOfFriends)
         {
             socialNetworkDictionary[friend].Remove(name);
         }
@@ -87,7 +87,7 @@ public class SocialNetwork
             Console.WriteLine($"{user} does not exist.");
             return;
         }
-        if (socialNetworkDictionary[user].Count() <=0)
+        if (socialNetworkDictionary[user].Count() <= 0)
         {
             Console.WriteLine($"{user} has no friends.");
             return;
@@ -97,6 +97,23 @@ public class SocialNetwork
         Console.WriteLine($"{user}'s friends: {friendList}");
     }
 
+    public void FindMutualFriends(string user1, string user2)
+    {
+        if (twoUsersExists(user1, user2))
+        {
+            Console.WriteLine("One or both users do not exist.");
+        }
+
+        List<string> mutualFriends = socialNetworkDictionary[user1].Intersect(socialNetworkDictionary[user2]).ToList();
+
+        if (mutualFriends.Count == 0)
+        {
+            Console.WriteLine($"{user1} and {user2} have no mutual friends.");
+            return;
+        }
+
+        Console.WriteLine($"Mutual friends of {user1} and {user2}: {String.Join(", ", mutualFriends)}");
+    }
 
     private bool userExists(string user)
     {
