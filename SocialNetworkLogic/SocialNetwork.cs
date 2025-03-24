@@ -1,4 +1,6 @@
-﻿namespace SocialNetworkLogic;
+﻿using System.Text;
+
+namespace SocialNetworkLogic;
 
 public class SocialNetwork
 {
@@ -78,6 +80,22 @@ public class SocialNetwork
         Console.WriteLine($"{user1} and {user2} are no longer friends.");
     }
 
+    public void DisplayFriends(string user)
+    {
+        if (!userExists(user))
+        {
+            Console.WriteLine($"{user} does not exist.");
+            return;
+        }
+        if (socialNetworkDictionary[user].Count() <=0)
+        {
+            Console.WriteLine($"{user} has no friends.");
+            return;
+        }
+
+        string friendList = String.Join(", ", socialNetworkDictionary[user]);
+        Console.WriteLine($"{user}'s friends: {friendList}");
+    }
 
 
     private bool userExists(string user)
