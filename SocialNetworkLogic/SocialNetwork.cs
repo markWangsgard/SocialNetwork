@@ -11,7 +11,7 @@ public class SocialNetwork
 
     public void AddUser(string name)
     {
-        if (socialNetworkDictionary.ContainsKey(name))
+        if (userExists(name))
         {
             Console.WriteLine($"{name} already exists.");
             return;
@@ -28,7 +28,7 @@ public class SocialNetwork
 
     public void RemoveUser(string name)
     {
-        if (!socialNetworkDictionary.ContainsKey(name))
+        if (!userExists(name))
         {
             Console.WriteLine($"{name} does not exist.");
             return;
@@ -58,6 +58,24 @@ public class SocialNetwork
         socialNetworkDictionary[user1].Add(user2);
         socialNetworkDictionary[user2].Add(user1);
         Console.WriteLine($"{user1} and {user2} are now friends.");
+    }
+
+    public void RemoveFriend(string user1, string user2)
+    {
+        if (twoUsersExists(user1, user2))
+        {
+            Console.WriteLine("One or both users do not exist.");
+            return;
+        }
+        if (!socialNetworkDictionary[user1].Contains(user2))
+        {
+            Console.WriteLine($"{user1} and {user2} are not friends.");
+            return;
+        }
+
+        socialNetworkDictionary[user1].Remove(user2);
+        socialNetworkDictionary[user2].Remove(user1);
+        Console.WriteLine($"{user1} and {user2} are no longer friends.");
     }
 
 
