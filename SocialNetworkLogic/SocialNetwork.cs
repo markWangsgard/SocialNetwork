@@ -25,4 +25,21 @@ public class SocialNetwork
     {
         return friendLists;
     }
+
+    public void RemoveUser(string name)
+    {
+        if (!friendLists.ContainsKey(name))
+        {
+            Console.WriteLine($"{name} does not exist.");
+            return;
+        }
+
+        var listOfFriends = friendLists[name];
+        foreach(var friend in listOfFriends)
+        {
+            friendLists[friend].Remove(name);
+        }
+        friendLists.Remove(name);
+        Console.WriteLine($"{name} has been removed from the network.");
+    }
 }
