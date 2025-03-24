@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Globalization;
+using System.Text;
 
 namespace SocialNetworkLogic;
 
@@ -113,6 +114,30 @@ public class SocialNetwork
         }
 
         Console.WriteLine($"Mutual friends of {user1} and {user2}: {String.Join(", ", mutualFriends)}");
+    }
+
+    public void SuggestFriends(string user)
+    {
+        if (!userExists(user))
+        {
+            Console.WriteLine($"{user} does not exist.");
+            return;
+        }
+
+        List<string> friendsOfFriends = new List<string>();
+        foreach (var friend in socialNetworkDictionary[user])
+        {
+            friendsOfFriends.Union(socialNetworkDictionary[friend]);
+        }
+        var friendSuggestions = friendsOfFriends.Except(socialNetworkDictionary[user]).ToList();
+
+        if (friendSuggestions.Count == 0)
+        {
+            Console.WriteLine($"No friend suggestions for {user}.");
+            return;
+        }
+
+        Console.WriteLine($"Friend suggestions for {user}: {String.Join(", ", friendSuggestions)}");
     }
 
     private bool userExists(string user)
