@@ -20,4 +20,9 @@ public class SocialNetwork
         friendLists[name] = new List<string>();
         Console.WriteLine($"{name} has been added.");
     }
+
+    public Dictionary<string, List<string>> GetNetwork()
+    {
+        return friendLists;
+    }
 }
