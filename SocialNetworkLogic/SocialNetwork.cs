@@ -1,7 +1,4 @@
-﻿using System.Globalization;
-using System.Text;
-
-namespace SocialNetworkLogic;
+﻿namespace SocialNetworkLogic;
 
 public class SocialNetwork
 {
